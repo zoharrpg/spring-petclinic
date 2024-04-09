@@ -45,7 +45,7 @@ pipeline {
         }
         stage("Deploy"){
             steps {
-                sh 'runbg.sh'
+                sh 'sh runbg.sh'
             }
         }
     }
