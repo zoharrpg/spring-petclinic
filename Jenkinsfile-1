@@ -40,16 +40,17 @@ pipeline {
             post {
                 success {
                     archiveArtifacts 'target/*.jar'
-                }
-            }
-        }
-        stage("Deploy"){
-            steps {
-                script {
                     sh 'nohup java -jar target/*.jar > output.log 2>&1 &'
-
                 }
             }
         }
+        // stage("Deploy"){
+        //     steps {
+        //         script {
+        //             sh 'nohup java -jar target/*.jar > output.log 2>&1 &'
+
+        //         }
+        //     }
+        // }
     }
 }
