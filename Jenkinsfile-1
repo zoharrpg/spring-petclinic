@@ -47,7 +47,7 @@ pipeline {
         stage("Deploy"){
             steps {
                 script {
-                    sh 'nohup java -jar target/*.jar > output.log 2>&1 &'
+                    sh 'JENKINS_NODE_COOKIE=dontKillMe nohup java -jar target/*.jar > output.log 2>&1 &'
 
                 }
             }
