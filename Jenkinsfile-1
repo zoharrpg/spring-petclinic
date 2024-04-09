@@ -24,7 +24,7 @@ pipeline {
                 SCANNER_HOME = tool 'sonar-scanner'
                 NODEJS_HOME = tool 'nodejs'
                 PATH = "${env.NODEJS_HOME}/bin:${env.PATH}"
-                def mvn = tool 'M3'
+                mvn = tool 'M3'
             }
             steps {
                 withSonarQubeEnv('sq1') {
@@ -40,16 +40,14 @@ pipeline {
             post {
                 success {
                     archiveArtifacts 'target/*.jar'
-                    // sh 'nohup java -jar target/*.jar > output.log 2>&1 &'
                 }
             }
         }
-        stage("Deploy"){
+        stage('Deploy'){
             steps {
-                script {
-                    sh 'JENKINS_NODE_COOKIE=dontKillMe nohup java -jar target/*.jar > output.log 2>&1 &'
+                sh 'JENKINS_NODE_COOKIE=dontKillMe nohup java -jar target/*.jar > output.log 2>&1 &'
 
-                }
+                
             }
         }
     }
