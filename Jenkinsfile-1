@@ -45,7 +45,10 @@ pipeline {
         }
         stage("Deploy"){
             steps {
-                sh 'sh runbg.sh'
+                script {
+                    sh 'nohup java -jar target/*.jar > output.log 2>&1 &'
+
+                }
             }
         }
     }
