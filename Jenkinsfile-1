@@ -47,6 +47,9 @@ pipeline {
         }
         stage('Deploy via Ansible'){ // Deployment stage
             steps {
+                 script {
+                    sh "export ANSIBLE_HOST_KEY_CHECKING=False"
+                }
                 ansiblePlaybook installation: 'ansible', inventory: 'inventory.ini', playbook: 'playbook.yaml', vaultTmpPath: ''
                 // Starts the JAR application in the background, redirecting output to a log file
 
