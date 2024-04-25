@@ -6,7 +6,7 @@
 
     - name: Find the jar file in the target directory
       find:
-        paths: "{{ workspace }}/target"
+        paths: "./target"
         patterns: "*.jar"
         use_regex: false
       register: jar_files

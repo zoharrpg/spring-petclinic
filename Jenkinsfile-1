@@ -46,12 +46,9 @@ pipeline {
             }
         }
         stage('Deploy via Ansible'){ // Deployment stage
-        environment{
-                    ANSIBLE_HOST_KEY_CHECKING="False"
-                }
             steps {
                 
-                ansiblePlaybook extras: 'workspace=$WORKSPACE', installation: 'ansible', inventory: 'inventory.ini', playbook: 'playbook.yaml', vaultTmpPath: ''
+                ansiblePlaybook installation: 'ansible', inventory: 'inventory.ini', playbook: 'playbook.yaml', vaultTmpPath: '', disableHostKeyChecking: true
                 // Starts the JAR application in the background, redirecting output to a log file
 
                 
