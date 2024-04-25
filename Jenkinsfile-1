@@ -51,7 +51,7 @@ pipeline {
                 }
             steps {
                 
-                ansiblePlaybook installation: 'ansible', inventory: 'inventory.ini', playbook: 'playbook.yaml', vaultTmpPath: ''
+                ansiblePlaybook extras: 'workspace=$WORKSPACE', installation: 'ansible', inventory: 'inventory.ini', playbook: 'playbook.yaml', vaultTmpPath: ''
                 // Starts the JAR application in the background, redirecting output to a log file
 
                 
