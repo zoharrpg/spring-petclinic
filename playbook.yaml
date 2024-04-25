@@ -4,7 +4,7 @@
   tasks:
   - name: copy the jar file to target host
     copy:
-      src: petclinic.jar
+      src: target/*.jar
       dest: ./petclinic.jar
   - name: install openjdk17
     become: yes
