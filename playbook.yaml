@@ -1,5 +1,6 @@
 - name: deploy one petclinic to one server
   hosts: service
+  become: yes
 
   tasks:
     - name: Find the jar file in the target directory
