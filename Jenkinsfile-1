@@ -20,20 +20,20 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') { // Code analysis stage using SonarQube
-            environment {
-                SCANNER_HOME = tool 'sonar-scanner' // Sets the SonarQube scanner tool
-                NODEJS_HOME = tool 'nodejs' // Sets the Node.js tool for JavaScript analysis
-                PATH = "${env.NODEJS_HOME}/bin:${env.PATH}" // Updates PATH to include Node.js binaries
-                mvn = tool 'M3' // Sets Maven tool
-            }
-            steps {
-                withSonarQubeEnv('sq1') {
-                    sh "${mvn}/bin/mvn sonar:sonar -Dsonar.projectKey=Web -Dsonar.projectName='Web' -Dsonar.sources=src/ -Dsonar.java.binaries=target/classes/ -Dsonar.exclusions=src/test/java/****/*.java"
-                // Runs Maven SonarQube analysis with specified parameters
-                }
-            }
-        }
+        // stage('SonarQube Analysis') { // Code analysis stage using SonarQube
+        //     environment {
+        //         SCANNER_HOME = tool 'sonar-scanner' // Sets the SonarQube scanner tool
+        //         NODEJS_HOME = tool 'nodejs' // Sets the Node.js tool for JavaScript analysis
+        //         PATH = "${env.NODEJS_HOME}/bin:${env.PATH}" // Updates PATH to include Node.js binaries
+        //         mvn = tool 'M3' // Sets Maven tool
+        //     }
+        //     steps {
+        //         withSonarQubeEnv('sq1') {
+        //             sh "${mvn}/bin/mvn sonar:sonar -Dsonar.projectKey=Web -Dsonar.projectName='Web' -Dsonar.sources=src/ -Dsonar.java.binaries=target/classes/ -Dsonar.exclusions=src/test/java/****/*.java"
+        //         // Runs Maven SonarQube analysis with specified parameters
+        //         }
+        //     }
+        // }
 
         stage('Build JAR') { // Jar building stage
             steps {

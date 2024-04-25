@@ -3,6 +3,13 @@
   become: yes
 
   tasks:
+  - name: Check current directory and list target directory
+      command: ls -la ./target
+      register: output
+
+    - name: Debug output
+      debug:
+        msg: "{{ output.stdout }}"
 
     - name: Find the jar file in the target directory
       find:
