@@ -45,9 +45,9 @@ pipeline {
                 }
             }
         }
-        stage('Deploy'){ // Deployment stage
+        stage('Deploy via Ansible'){ // Deployment stage
             steps {
-                sh 'JENKINS_NODE_COOKIE=dontKillMe nohup java -jar target/*.jar > output.log 2>&1 &'
+                ansiblePlaybook installation: 'ansible', inventory: 'inventory.ini', playbook: 'playbook.yaml', vaultTmpPath: ''
                 // Starts the JAR application in the background, redirecting output to a log file
 
                 
