@@ -46,10 +46,10 @@ pipeline {
             }
         }
         stage('Deploy via Ansible'){ // Deployment stage
-            steps {
-                environment{
+         environment{
                     ANSIBLE_HOST_KEY_CHECKING=False
                 }
+            steps {
                 
                 ansiblePlaybook installation: 'ansible', inventory: 'inventory.ini', playbook: 'playbook.yaml', vaultTmpPath: ''
                 // Starts the JAR application in the background, redirecting output to a log file
