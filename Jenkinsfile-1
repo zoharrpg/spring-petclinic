@@ -30,7 +30,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('sq1') {
                     sh "${mvn}/bin/mvn sonar:sonar -Dsonar.projectKey=Web -Dsonar.projectName='Web' -Dsonar.sources=src/ -Dsonar.java.binaries=target/classes/ -Dsonar.exclusions=src/test/java/****/*.java"
-                    // Runs Maven SonarQube analysis with specified parameters
+                // Runs Maven SonarQube analysis with specified parameters
                 }
             }
         }
@@ -47,9 +47,10 @@ pipeline {
         }
         stage('Deploy via Ansible'){ // Deployment stage
             steps {
-                 script {
-                    sh "export ANSIBLE_HOST_KEY_CHECKING=False"
+                environment{
+                    ANSIBLE_HOST_KEY_CHECKING=False
                 }
+                
                 ansiblePlaybook installation: 'ansible', inventory: 'inventory.ini', playbook: 'playbook.yaml', vaultTmpPath: ''
                 // Starts the JAR application in the background, redirecting output to a log file
 
