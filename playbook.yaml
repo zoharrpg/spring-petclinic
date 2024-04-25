@@ -3,19 +3,13 @@
   become: yes
 
   tasks:
-    # - name: Ensure access to target directory
-    # file:
-    #   path: /var/jenkins_home/workspace/Web/target
-    #   state: directory
-    #   mode: '0755'
-    # become: yes
 
     - name: Find the jar file in the target directory
       find:
-        paths: "{{ playbook_dir }}/target"
+        paths: "{{ jenkins_workspace }}/target"
         patterns: "*.jar"
+        use_regex: false
       register: jar_files
-      become: yes
     - name: Fail if no jar file is found
       fail:
         msg: "No jar file found in target directory."
