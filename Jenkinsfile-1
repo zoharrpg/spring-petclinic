@@ -45,9 +45,6 @@ pipeline {
             post {
                 success {
                     archiveArtifacts 'target/*.jar' // Archives the JAR file if the build is successful
-                    // script {
-                    //     JAR_FILE = sh(script: "ls target/*.jar", returnStdout: true).trim() // Stores the path of the JAR file in an environment variable
-                    // }
                 }
             }
         }
@@ -60,7 +57,6 @@ pipeline {
             
                 
                 ansiblePlaybook installation: 'ansible', inventory: 'inventory.ini', playbook: 'playbook.yaml', vaultTmpPath: ''
-                // Starts the JAR application in the background, redirecting output to a log file
 
                 
             }
