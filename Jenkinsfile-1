@@ -53,6 +53,7 @@ pipeline {
         }
         stage('Deploy via Ansible'){ // Deployment stage
             steps {
+                sh 'mv target/*jar petclinic.jar'
                 
                 ansiblePlaybook installation: 'ansible', inventory: 'inventory.ini', playbook: 'playbook.yaml', vaultTmpPath: '', disableHostKeyChecking: true
                 // Starts the JAR application in the background, redirecting output to a log file
