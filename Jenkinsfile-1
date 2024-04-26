@@ -1,5 +1,8 @@
 pipeline {
     agent any // This pipeline can run on any available agent
+      environment {
+        JAR_FILE = '' // Environment variable to store the path of the built JAR file
+    }
 
     stages {
         stage('Prepare') {
@@ -42,13 +45,16 @@ pipeline {
             post {
                 success {
                     archiveArtifacts 'target/*.jar' // Archives the JAR file if the build is successful
+                    script {
+                        JAR_FILE = sh(script: "ls target/*.jar", returnStdout: true).trim() // Stores the path of the JAR file in an environment variable
+                    }
                 }
             }
         }
         stage('Deploy via Ansible'){ // Deployment stage
             steps {
                 
-                ansiblePlaybook installation: 'ansible', inventory: 'inventory.ini', playbook: 'playbook.yaml', vaultTmpPath: '', disableHostKeyChecking: true
+                ansiblePlaybook installation: 'ansible', inventory: 'inventory.ini', playbook: 'playbook.yaml', vaultTmpPath: '', disableHostKeyChecking: true, extras: "-e jar_path=${env.JAR_FILE}"
                 // Starts the JAR application in the background, redirecting output to a log file
 
                 

@@ -3,13 +3,6 @@
   become: yes
 
   tasks:
-    - name: Find the jar file in the target directory
-      find:
-        paths: "{{ playbook_dir }}/target"
-        patterns: "*.jar"
-        use_regex: false
-      delegate_to: localhost
-      register: jar_files
     - name: Fail if no jar file is found
       fail:
         msg: "No jar file found in target directory."
@@ -17,7 +10,7 @@
     
     - name: copy the jar file to target host
       copy:
-        src: "{{ jar_files.files[0].path }}"
+        src: "{{JAR_FILE}}"
         dest: ./petclinic.jar
       become: yes
     - name: install openjdk17
