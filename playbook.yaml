@@ -3,11 +3,6 @@
   become: yes
 
   tasks:
-    - name: Fail if no jar file is found
-      fail:
-        msg: "No jar file found in target directory."
-      when: jar_files.matched == 0
-    
     - name: copy the jar file to target host
       copy:
         src: "{{JAR_FILE}}"
